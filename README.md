@@ -18,8 +18,13 @@ Faire Attention !
 1. Amitié qui vient après le like
 2. Debut des ts des fichiers (d secondes)
 3. faire attention D (timeline générale / séparées likes ou comment)
+4. Le score peut augmenter de plus de 1 à la fois.
 
 
 Idées
 1. Classe comment (id(constructeur) , score(initialisé) , string(peut venir après) 
 2. Graphe (à partir de frienship)
+
+3. Lire un seul commentaire à la fois
+4. Lire le plus vieux like / friendship à chaque itération
+
