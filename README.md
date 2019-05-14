@@ -19,7 +19,7 @@ Faire Attention !
 2. Debut des ts des fichiers (d secondes)
 3. faire attention D (timeline générale / séparées likes ou comment)
 4. Le score peut augmenter de plus de 1 à la fois.
-
+5. Si le score est égal, le commentaire prenant la place la plus haute est celui le plus petit lexicalement (aaa > aab).
 
 Idées
 1. Classe comment (id(constructeur) , score(initialisé) , string(peut venir après) 
