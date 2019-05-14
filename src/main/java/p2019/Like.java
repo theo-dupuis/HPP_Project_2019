@@ -51,6 +51,10 @@ public class Like {
 			return false;
 		return true;
 	}
+
+	public String getTimeStamp() {
+		return timeStamp_.toString();
+	}
 	
 	
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
+import p2019.Comment;
 import p2019.Like;
 import p2019.MyApp;
 
@@ -13,12 +14,10 @@ public class User extends Observable {
 	
 	private String id;
 	private Set<User> friends;
-	private Set<Like> likes;
 	
 	public User(String id) {
 		this.id = id;
 		friends  = new HashSet<>();
-		likes = new HashSet<>();
 	}
 
 	public void addFriend(User friend, String timestamp)
@@ -30,8 +29,9 @@ public class User extends Observable {
 	
 	public void addLike(Like like)
 	{
-		likes.add(like);
-		addObserver(MyApp.comments.get(like.getComment()));
+		Comment comment = MyApp.comments.get(like.getComment());
+		addObserver(comment);
+		comment.processLike(like.getTimeStamp(), this);
 		
 	}
 	
@@ -64,4 +64,7 @@ public class User extends Observable {
 		return true;
 	}
 	
+	public boolean isFriend(User usr) {
+		return friends.contains(usr);
+	}
 }

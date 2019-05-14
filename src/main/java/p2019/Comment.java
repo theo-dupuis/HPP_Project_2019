@@ -3,8 +3,10 @@ package p2019;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,10 +18,10 @@ public class Comment implements Observer{
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS+0000");
 	private Date creationTimeStamp_;
 	private Date lastUpdateTimeStamp_;
-	private int commentId_;
+	private String commentId_;
 	private String comment_;
 	private int score_;
-	private Map<String, User> likers;
+	private List<User> likers;
 	
 	public Comment(String ts, String commentId, String comment)
 	{
@@ -31,10 +33,10 @@ public class Comment implements Observer{
 			e.printStackTrace();
 		}
 		
-		commentId_ = Integer.parseInt(commentId);
+		commentId_ = commentId;
 		comment_ = comment;
 		score_ =0;
-		likers = new HashMap<>();
+		likers = new ArrayList<>();
 	}
 
 	@Override
@@ -72,13 +74,24 @@ public class Comment implements Observer{
 			System.out.println("Error while updating timestamp");
 		}
 		
+		processFriendship();
+		
 	}
 	
-	public void processLike(String ts) {
+	public void processLike(String ts, User user) {
 		try {
 			lastUpdateTimeStamp_ = format.parse(ts);
 		} catch (ParseException e) {
 			System.out.println("Error while updating timestamp");
 		}
+		
+		for(User u : likers)
+			if(user.isFriend(u))
+				score_+=1; // Score chez tous les utilisateurs ?
+		
+	}
+	
+	public void processFriendship() {
+		
 	}
 }
