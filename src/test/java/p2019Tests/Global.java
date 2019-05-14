@@ -1,0 +1,15 @@
+package p2019Tests;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class Global {
+
+	@Test
+	public void test1() {
+		String commentsPath = "Test Cases/T1_comments.dat";
+		String friendshipsPath = "Test Cases/T1_friendships.dat";
+		String likesPath = "Test Cases/T1_likes.dat";
+	}
+
+}
