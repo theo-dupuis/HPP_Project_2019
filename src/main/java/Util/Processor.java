@@ -1,8 +1,8 @@
 package Util;
 
 import p2019.Comment;
-import p2019.Friendship;
 import p2019.Like;
+import p2019.MyApp;
 
 public class Processor {
 	
@@ -13,7 +13,7 @@ public class Processor {
 	
 	private static void processFriendship(String data) {
 		String[] dataHolder = data.split("|");
-		new Friendship(dataHolder[0],dataHolder[1],dataHolder[2]);
+		MyApp.friendshipGraph.addFriendship(dataHolder[0],dataHolder[1],dataHolder[2]);
 	}
 	
 	private static void processLike(String data) {
