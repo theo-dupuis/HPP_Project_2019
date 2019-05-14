@@ -1,4 +1,4 @@
-package p2019Tests;
+package Util;
 
 import static org.junit.Assert.*;
 
