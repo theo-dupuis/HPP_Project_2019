@@ -1,30 +1,30 @@
 package Util;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Reader {
+	private String fileType;
+	
+	public Reader(String fileType) {
+		this.fileType = fileType;
+	}
 
-	public static void processFile(String fileName) {
+	public void processFile(String fileName) {
 		String data = "";
+		
+		File file = new File(fileName);
+		
 		try {
-			data = readFileAsString(fileName);
-		} catch (Exception e) {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			while ((data = br.readLine()) != null)
+				Processor.process(fileType, data);
+			
+		} catch (IOException e) {
 			System.out.println("Error while reading");
 		}
 
-		if (fileName.contains(FileType.Comment.toString()))
-			Processor.processComment(data);
-		else if(fileName.contains(FileType.Friendship.toString()))
-			Processor.processFriendship(data);
-		else if(fileName.contains(FileType.Like.toString()))
-			Processor.processLike(data);
-
-	}
-
-	private static String readFileAsString(String fileName) throws Exception {
-		String data = "";
-		data = new String(Files.readAllBytes(Paths.get(fileName)));
-		return data;
 	}
 }
