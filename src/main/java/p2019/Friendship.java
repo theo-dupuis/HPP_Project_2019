@@ -19,6 +19,8 @@ public class Friendship {
 			e.printStackTrace();
 		}
 		
+		MyApp.friendshipGraph.addFriendship(user1Id, user2Id);
+		
 		user1Id_ = Integer.parseInt(user1Id);
 		user2Id_ = Integer.parseInt(user2Id);
 	}
