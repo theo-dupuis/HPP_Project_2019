@@ -1,10 +1,10 @@
-package p2019Tests;
+package p2019;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class CommentTest {
+public class FriendshipTest {
 
 	@Test
 	public void test() {
