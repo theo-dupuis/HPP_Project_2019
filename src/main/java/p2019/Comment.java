@@ -4,13 +4,16 @@ package p2019;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Comment {
+public class Comment implements Observer{
 	
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS+0000");
 	private Date timeStamp_;
 	private int commentId_;
 	private String comment_;
+	private int score_;
 	
 	public Comment(String ts, String commentId, String comment)
 	{
@@ -23,6 +26,7 @@ public class Comment {
 		
 		commentId_ = Integer.parseInt(commentId);
 		comment_ = comment;
+		score_ =0;
 	}
 
 	@Override
@@ -45,6 +49,11 @@ public class Comment {
 		if (commentId_ != other.commentId_)
 			return false;
 		return true;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
 	}
 	
 	

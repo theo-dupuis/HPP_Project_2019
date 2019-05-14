@@ -2,18 +2,20 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Graph {
-	private Map<User, List<User>> friendship;
+	private Set<User> friendship;
 	
 	public Graph() {
-		friendship = new HashMap<>();
+		friendship = new HashSet<>();
 	}
 	
 	public void addUser(String id) {
-		friendship.putIfAbsent(new User(id), new ArrayList<>());
+		friendship.add(new User(id));
 	}
 	
 	public void addFriendship(String id1, String id2) {
@@ -22,12 +24,10 @@ public class Graph {
 		
 		addUser(id1);
 		addUser(id2);
-		friendship.get(a).add(b);
-		friendship.get(b).add(a);
+		a.addFriend(b);
+		b.addFriend(a);
 	}
-	
-	public List<User> findBuddies(String id){
-		return friendship.get(new User(id));
-	}
+
+
 	
 }

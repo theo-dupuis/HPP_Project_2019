@@ -1,12 +1,28 @@
 package graph;
 
-public class User {
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Observable;
+import java.util.Set;
+
+public class User extends Observable {
+	
 	private String id;
+	private Set<User> friends;
 	
 	public User(String id) {
 		this.id = id;
+		friends  = new HashSet<>();
 	}
 
+	public void addFriend(User friend)
+	{
+		friends.add(friend);
+		setChanged();
+		notifyObservers();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -31,6 +47,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
 	
 }
