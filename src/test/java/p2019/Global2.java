@@ -12,7 +12,7 @@ import org.junit.Test;
 public class Global2 {
 	/** Basic 2 **/
 	@Test
-	public void test2_withoutFile() {
+	public void test_withoutFile() {
 		String commentsPath = "Test Cases/T2_comments.dat";
 		String friendshipsPath = "Test Cases/T2_friendships.dat";
 		String likesPath = "Test Cases/T2_likes.dat";
@@ -24,7 +24,7 @@ public class Global2 {
 		assertEquals(Expected_Output,output);
 	}
 	@Test
-	public void test2_withFile() {
+	public void test_withFile() {
 		String commentsPath = "Test Cases/T2_comments.dat";
 		String friendshipsPath = "Test Cases/T2_friendships.dat";
 		String likesPath = "Test Cases/T2_likes.dat";

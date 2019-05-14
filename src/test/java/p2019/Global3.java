@@ -13,7 +13,7 @@ public class Global3 {
 	/** exceed limit by 1 ms **/
 	/** Likes **/
 	@Test
-	public void test3_withoutFile() {
+	public void test1_withoutFile() {
 		String commentsPath = "Test Cases/T3_comments.dat";
 		String friendshipsPath = "Test Cases/T3_friendships.dat";
 		String likesPath = "Test Cases/T3_likes.dat";
@@ -25,7 +25,7 @@ public class Global3 {
 		assertEquals(Expected_Output,output);
 	}
 	@Test
-	public void test3_withFile() {
+	public void test1_withFile() {
 		String commentsPath = "Test Cases/T3_comments.dat";
 		String friendshipsPath = "Test Cases/T3_friendships.dat";
 		String likesPath = "Test Cases/T3_likes.dat";
@@ -46,7 +46,7 @@ public class Global3 {
 	}
 	/** Friendships **/
 	@Test
-	public void test4_withoutFile() {
+	public void test2_withoutFile() {
 		String commentsPath = "Test Cases/T4_comments.dat";
 		String friendshipsPath = "Test Cases/T4_friendships.dat";
 		String likesPath = "Test Cases/T4_likes.dat";
@@ -58,7 +58,7 @@ public class Global3 {
 		assertEquals(Expected_Output,output);
 	}
 	@Test
-	public void test4_withFile() {
+	public void test2_withFile() {
 		String commentsPath = "Test Cases/T4_comments.dat";
 		String friendshipsPath = "Test Cases/T4_friendships.dat";
 		String likesPath = "Test Cases/T4_likes.dat";
