@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class Graph {
-	private Set<User> friendship;
+	private HashMap<String, User> friendship;
 	
 	public Graph() {
-		friendship = new HashSet<>();
+		friendship = new HashMap<>();
 	}
 	
 	public void addUser(String id) {
-		friendship.add(new User(id));
+		friendship.putIfAbsent(id, new User(id));
 	}
 	
 	public void addFriendship(String id1, String id2) {

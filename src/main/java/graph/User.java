@@ -6,23 +6,39 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
+import p2019.Like;
+import p2019.MyApp;
+
 public class User extends Observable {
 	
 	private String id;
 	private Set<User> friends;
+	private Set<Like> likes;
 	
 	public User(String id) {
 		this.id = id;
 		friends  = new HashSet<>();
+		likes = new HashSet<>();
 	}
 
-	public void addFriend(User friend)
+	public void addFriend(User friend, String timestamp)
 	{
 		friends.add(friend);
 		setChanged();
-		notifyObservers();
+		notifyObservers(timestamp);
 	}
 	
+	public void addLike(Like like)
+	{
+		likes.add(like);
+		addObserver(MyApp.comments.get(like.getComment()));
+		
+	}
+	
+	public String getId()
+	{
+		return id;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

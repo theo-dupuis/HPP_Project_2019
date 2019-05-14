@@ -11,6 +11,7 @@ public class Friendship {
 	private Date timeStamp_;
 	private int user1Id_;
 	private int user2Id_;
+	
 	public Friendship(String ts, String user1Id, String user2Id) {
 		try {
 			timeStamp_ = format.parse(ts);

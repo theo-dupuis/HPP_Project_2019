@@ -4,8 +4,12 @@ package p2019;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+
+import graph.User;
 
 public class Comment implements Observer{
 	
@@ -14,6 +18,7 @@ public class Comment implements Observer{
 	private int commentId_;
 	private String comment_;
 	private int score_;
+	private Map<String, User> likers;
 	
 	public Comment(String ts, String commentId, String comment)
 	{
@@ -27,6 +32,7 @@ public class Comment implements Observer{
 		commentId_ = Integer.parseInt(commentId);
 		comment_ = comment;
 		score_ =0;
+		likers = new HashMap<>();
 	}
 
 	@Override
@@ -37,6 +43,11 @@ public class Comment implements Observer{
 		return result;
 	}
 
+	public void addLiker(User liker)
+	{
+		likers.put(liker.getId(), liker);
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
