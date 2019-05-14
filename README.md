@@ -1,7 +1,7 @@
 Info Utiles dans l'input
 
 Comments
-ts , comment_id , user_id ,  comment
+ts , comment_id ,  comment
 
 Friendship
 ts, user_id_1, user_id_2
