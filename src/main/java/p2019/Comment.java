@@ -7,10 +7,13 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
+import graph.User;
+
 public class Comment implements Observer{
 	
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS+0000");
-	private Date timeStamp_;
+	private Date creationTimeStamp_;
+	private Date lastUpdateTimeStamp_;
 	private int commentId_;
 	private String comment_;
 	private int score_;
@@ -18,7 +21,8 @@ public class Comment implements Observer{
 	public Comment(String ts, String commentId, String comment)
 	{
 		try {
-			timeStamp_ = format.parse(ts);
+			creationTimeStamp_ = format.parse(ts);
+			lastUpdateTimeStamp_ = creationTimeStamp_;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,9 +57,19 @@ public class Comment implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
+		try {
+			lastUpdateTimeStamp_ = format.parse((String)arg);
+		} catch (ParseException e) {
+			System.out.println("Error while updating timestamp");
+		}
 		
 	}
 	
-	
-	
+	public void processLike(String ts) {
+		try {
+			lastUpdateTimeStamp_ = format.parse(ts);
+		} catch (ParseException e) {
+			System.out.println("Error while updating timestamp");
+		}
+	}
 }

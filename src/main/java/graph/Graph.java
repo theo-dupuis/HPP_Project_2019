@@ -18,14 +18,14 @@ public class Graph {
 		friendship.add(new User(id));
 	}
 	
-	public void addFriendship(String id1, String id2) {
+	public void addFriendship(String ts, String id1, String id2) {
 		User a = new User(id1);
 		User b = new User(id2);
 		
 		addUser(id1);
 		addUser(id2);
-		a.addFriend(b);
-		b.addFriend(a);
+		a.addFriend(b, ts);
+		b.addFriend(a, ts);
 	}
 
 
