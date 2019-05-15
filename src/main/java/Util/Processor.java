@@ -64,6 +64,19 @@ public class Processor {
 	
 	private static void processFriendship(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
-		//MyApp.friendshipGraph.addFriendship(dataHolder[0],dataHolder[1],dataHolder[2]);
+		
+		String timeStamp = dataHolder[0];
+		User user1 = MyApp.users.get(dataHolder[1]);
+		User user2 = MyApp.users.get(dataHolder[2]);
+		
+		user1.getFriends().add(user2);
+		user2.getFriends().add(user1);
+		
+		for(Comment c : user1.getComments()) {
+			if(user2.getComments().contains(c)) {
+				c.communityMerge(user1, user2);
+				c.updateTimeStamp(timeStamp);
+			}
+		}
 	}
 }
