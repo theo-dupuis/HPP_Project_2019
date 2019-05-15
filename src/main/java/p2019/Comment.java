@@ -110,6 +110,7 @@ public class Comment{
 		if (c.getSize() > range)
 		{
 			range = c.getSize();
+			MyApp.rank.changeRange(this);
 		}
 	}
 	
