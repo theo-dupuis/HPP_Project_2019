@@ -10,19 +10,23 @@ import p2019.MyApp;
 
 public class Rank {
 
-	private Comparator<Comment> comparator = new Comparator<>()
+	private Comparator<Comment> comparator = new Comparator<Comment>()
 	{
 		@Override
         public int compare(Comment comm1, Comment comm2)
         {
 			if (comm1.getRange()==comm2.getRange())
 			{
-				return comm1.getContent()> comm2.getContent();
+				return comm1.getContent().compareTo(comm2.getContent());
 			}
 			else
-				return comm1.getRange()>comm2.getRange();
+			{
+				if (comm1.getRange()>comm2.getRange())
+					return 1;
+				else return -1;
+			}
         }
-	}
+	};
 	
 	private List<Comment> comments;
 	public Rank() {
