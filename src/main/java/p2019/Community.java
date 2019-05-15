@@ -31,7 +31,7 @@ public class Community {
 	
 	public void merge(Community c)
 	{
-		c.getUsers().stream().forEach(u->users.add(u));
+		users.addAll(c.getUsers());
 		size = users.size();
 	}
 
