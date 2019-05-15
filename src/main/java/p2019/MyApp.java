@@ -6,11 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import graph.Graph;
-
 public class MyApp {
 	
-	public static Graph friendshipGraph = new Graph();
 	public static Map<String, Comment> comments = new HashMap<>();
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");
 	

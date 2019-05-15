@@ -38,6 +38,16 @@ public class Comment {
 		range =0;
 		communities = new HashMap<>();
 	}
+	
+	public int getRange() { return range;}
+	
+	public void updateTimeStamp(String ts) {
+		try {
+			lastUpdateTimeStamp = MyApp.dateFormat.parse(ts);
+		} catch (ParseException e) {
+			System.out.println("Error while formatting timestamp");
+		}
+	}
 
 	public Date getLastUpdateTimeStamp() {
 		return lastUpdateTimeStamp;
@@ -61,10 +71,6 @@ public class Comment {
 
 	public Date getCreationTimeStamp() {
 		return creationTimeStamp;
-	}
-
-	public int getRange() {
-		return range;
 	}
 
 	@Override
