@@ -33,7 +33,6 @@ public class Processor {
 	
 	private static void processLike(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
-		boolean flag = false;
 		
 		String timeStamp = dataHolder[0];
 		String userID = dataHolder[1];
@@ -42,31 +41,25 @@ public class Processor {
 		User user;
 		Comment comment = MyApp.comments.get(commentID);
 		
+		comment.updateTimeStamp(timeStamp);
+		
 		if(MyApp.users.containsKey(userID))
 			user = MyApp.users.get(userID);
 		else {
 			user = new User(userID);
 			MyApp.users.put(userID, user);
 		}
+
 		
 		for(User u : user.getFriends()) {
 			if(comment.getCommunities().containsKey(u)) {
-				flag = true;
-				break;
+				Community comm = comment.getCommunities().get(u);
+				comm.addUser(user);
+				comment.sizeHasChanged(comm);
+				return;
 			}
 		}
-		
-		if(flag) {
-			Community comm = comment.getCommunities().get(u);
-			comm.addUser(user);
-			comment.sizeHasChanged(comm);
-		}
-		else {
-			comment.getCommunities().put(user, new Community(user));
-		}
-		
-		comment.updateTimeStamp(timeStamp);
-		
+		comment.getCommunities().put(user, new Community(user));
 	}
 	
 	private static void processFriendship(String data) {
