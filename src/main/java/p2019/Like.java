@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Like {
 
-	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS+0000");
+	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");
 	private Date timeStamp_;
 	private String commentId_;
 	private String userId_;
