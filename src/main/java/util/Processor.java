@@ -30,7 +30,7 @@ public class Processor {
 	
 	private static void processComment(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
-		new Comment(dataHolder[0],dataHolder[1],dataHolder[3]);
+		MyApp.comments.put(dataHolder[1],new Comment(dataHolder[0],dataHolder[1],dataHolder[3]));
 	}
 	
 	private static void processLike(String data) {
@@ -69,8 +69,24 @@ public class Processor {
 		String[] dataHolder = data.split(Pattern.quote("|"));
 		
 		String timeStamp = dataHolder[0];
-		User user1 = MyApp.users.get(dataHolder[1]);
-		User user2 = MyApp.users.get(dataHolder[2]);
+		String user1Id = dataHolder[1];
+		String user2Id = dataHolder[2];
+		User user1;
+		User user2;
+		
+		if(MyApp.users.containsKey(user1Id))
+			user1 = MyApp.users.get(user1Id);
+		else {
+			user1 = new User(user1Id);
+			MyApp.users.put(user1Id, user1);
+		}
+		
+		if(MyApp.users.containsKey(user2Id))
+			user2 = MyApp.users.get(user2Id);
+		else {
+			user2 = new User(user2Id);
+			MyApp.users.put(user2Id, user2);
+		}
 		
 		user1.getFriends().add(user2);
 		user2.getFriends().add(user1);

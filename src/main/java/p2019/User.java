@@ -44,8 +44,6 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result + ((friends == null) ? 0 : friends.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -59,16 +57,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (comments == null) {
-			if (other.comments != null)
-				return false;
-		} else if (!comments.equals(other.comments))
-			return false;
-		if (friends == null) {
-			if (other.friends != null)
-				return false;
-		} else if (!friends.equals(other.friends))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;

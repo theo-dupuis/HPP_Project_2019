@@ -48,7 +48,7 @@ public class Comment{
 		return lastUpdateTimeStamp;
 	}
 
-	public void updateTimeStamp(Date lastUpdateTimeStamp) {
+	public void updateTimeStampDate(Date lastUpdateTimeStamp) {
 		this.lastUpdateTimeStamp = lastUpdateTimeStamp;
 	}
 
@@ -115,7 +115,7 @@ public class Comment{
 	}
 	
 	private boolean isAlive() {
-		if(lastUpdateTimeStamp.getTime() - creationTimeStamp.getTime() > MyApp.duration) {
+		if(lastUpdateTimeStamp.getTime() - creationTimeStamp.getTime() > MyApp.duration*1000) {
 			for(User u : communities.keySet())
 				u.getComments().remove(this);
 			

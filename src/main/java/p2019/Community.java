@@ -7,6 +7,7 @@ public class Community {
 
 	private int size;
 	private Set<User> users = new HashSet<>();
+	
 	public Community(User user) {
 		users.add(user);
 	}
