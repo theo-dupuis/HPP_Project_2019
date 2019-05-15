@@ -68,6 +68,10 @@ public class Comment {
 	public String getId() {
 		return id;
 	}
+	
+	public Map<User, Community> getCommunities() {
+		return communities;
+	}
 
 	public Date getCreationTimeStamp() {
 		return creationTimeStamp;
