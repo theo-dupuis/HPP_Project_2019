@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import graph.User;
+
 public class Comment {
 	
 	private String id;
@@ -20,7 +22,7 @@ public class Comment {
 	
 	private int range;
 	private String content;
-	private List<Community> communities;
+	private Map<User, Community> communities;
 	
 	public Comment(String ts, String commentId, String comment)
 	{
@@ -34,7 +36,7 @@ public class Comment {
 		id = commentId;
 		content = comment;
 		range =0;
-		communities = new ArrayList<>();
+		communities = new HashMap<>();
 	}
 
 	public Date getLastUpdateTimeStamp() {
@@ -90,6 +92,14 @@ public class Comment {
 		return true;
 	}
 	
-	
-	
+	public void communityMerge(User user1, User user2)
+	{
+		Community comm = communities.get(user1);
+		comm.merge(communities.get(user2));
+		communities.put(user2, comm);
+		if (comm.getSize()> range)
+		{
+			range = comm.getSize();
+		}
+	}
 }

@@ -11,10 +11,12 @@ public class Community {
 
 	private int size;
 	private Set<User> users = new HashSet<>();
+	public Community(User user) {
+		users.add(user);
+	}
 	public Community() {
 		
 	}
-	
 	public int getSize() {
 		return size;
 	}
