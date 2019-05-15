@@ -42,17 +42,9 @@ public class Processor {
 		
 		User user;
 		Comment comment = MyApp.comments.get(commentID);
-		Date date = null;
-		Date dateLimit = null;
-		try {
-			date = MyApp.dateFormat.parse(timeStamp);
-			dateLimit = new Date(date.getTime()-MyApp.duration*1000); // si le commentaire a ete posté avant datelimit, on ignore
-		} catch (ParseException e) {
-			System.out.println("Error while formatting timestamp");
-		}
-		if (comment.getCreationTimeStamp().before(dateLimit))
+		
+		if (!comment.updateTimeStamp(timeStamp))
 			return;
-		comment.updateTimeStamp(timeStamp);
 		
 		if(MyApp.users.containsKey(userID))
 			user = MyApp.users.get(userID);
