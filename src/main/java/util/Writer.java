@@ -1,30 +1,28 @@
 package util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Writer {
 
-	private String filePath;
-	public Writer(String filePath) {
-		this.filePath = filePath;
+	private File file;
+	
+	public Writer(File file) {
+		this.file = file;
 	}
 	public void write(String data) {
-        File file = new File(filePath);
-        FileWriter fr = null;
-        try {
-            fr = new FileWriter(file);
-            fr.write(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally{
-            //close resources
-            try {
-                fr.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        	BufferedWriter bw;
+        	if(file.exists()) {
+				try {
+					bw = new BufferedWriter(new FileWriter(file, true));
+					bw.append("\r\n");
+		        	bw.append(data);
+		            bw.close();
+				} catch (IOException e) {
+					System.out.println("Error while writing");
+				}
+        	}
 	}
 }

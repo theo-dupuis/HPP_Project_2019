@@ -1,5 +1,7 @@
 package util;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -10,6 +12,9 @@ import p2019.MyApp;
 
 public class Rank {
 
+	private File file;
+	private Writer writer;
+	
 	private Comparator<Comment> comparator = new Comparator<Comment>()
 	{
 		@Override
@@ -31,6 +36,15 @@ public class Rank {
 	private List<Comment> comments;
 	public Rank() {
 		comments = new ArrayList<>(MyApp.k);
+		file  = new File("Output.txt");
+		
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			System.out.println("Error while creating output file");
+		}
+		
+		writer = new Writer(file);
 	}
 
 	public void changeRange(Comment c)
@@ -58,5 +72,7 @@ public class Rank {
 		{
 			str.append(",-");
 		}
+		
+		writer.write(str.toString());
 	}
 }
