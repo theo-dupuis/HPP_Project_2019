@@ -17,7 +17,7 @@ public class Global1 {
 	String friendshipsPath="";
 	String likesPath="";
 	String Expected_Output="";
-	String outputFilePath="";
+	String outputFilePath="Output.txt";
 	@Before
 	public void pathCreation() {
 		commentsPath = "Test_Cases/T1_comments.dat";
@@ -38,14 +38,14 @@ public class Global1 {
 	public void test1_withFile() {
 		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
 		MyApp.main(args);
-		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
-		outputFilePath = url.getPath();
+		//URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
+		//outputFilePath = url.getPath();
 		File outputfile = new File(outputFilePath);
 		assertTrue(outputfile.exists());
 		try {
 			// expectedLinesOutputInFile
 			String eLOIF = new String(Files.readAllBytes(Paths.get(outputFilePath)));
-			assertEquals(eLOIF,Expected_Output);
+			assertEquals(Expected_Output,eLOIF);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
