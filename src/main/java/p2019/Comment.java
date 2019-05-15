@@ -15,7 +15,7 @@ import graph.User;
 
 public class Comment implements Observer{
 	
-	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS+0000");
+	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");
 	private Date creationTimeStamp_;
 	private Date lastUpdateTimeStamp_;
 	private String commentId_;

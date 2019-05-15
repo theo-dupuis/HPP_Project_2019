@@ -23,7 +23,7 @@ public class Reader {
 				Processor.process(fileType, data);
 			
 		} catch (IOException e) {
-			System.out.println("Error while reading");
+			System.out.println(e.getMessage());
 		}
 
 	}
