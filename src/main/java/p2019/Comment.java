@@ -34,12 +34,14 @@ public class Comment {
 	
 	public int getRange() { return range;}
 	
-	public void updateTimeStamp(String ts) {
+	public boolean updateTimeStamp(String ts) {
 		try {
 			lastUpdateTimeStamp = MyApp.dateFormat.parse(ts);
 		} catch (ParseException e) {
 			System.out.println("Error while formatting timestamp");
 		}
+		
+		return isAlive();
 	}
 
 	public Date getLastUpdateTimeStamp() {
@@ -109,5 +111,19 @@ public class Comment {
 		{
 			range = c.getSize();
 		}
+	}
+	
+	private boolean isAlive() {
+		if(lastUpdateTimeStamp.getTime() - creationTimeStamp.getTime() > MyApp.duration) {
+			for(User u : communities.keySet())
+				u.getComments().remove(this);
+			
+			communities = null;
+			MyApp.comments.remove(id);
+			
+			return false;
+		}
+		
+		return true;
 	}
 }

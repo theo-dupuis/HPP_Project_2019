@@ -74,16 +74,9 @@ public class Processor {
 		
 		user1.getFriends().add(user2);
 		user2.getFriends().add(user1);
-		Date date = null;
-		Date datelimit = null;
-		try {
-			date = MyApp.dateFormat.parse(timeStamp);
-			datelimit = new Date(date.getTime()-MyApp.duration*1000); // si le commentaire a ete posté avant datelimit, on ignore
-		} catch (ParseException e) {
-			System.out.println("Error while formatting timestamp");
-		}
+		
 		for(Comment c : user1.getComments()) {
-			if (c.getCreationTimeStamp().before(datelimit))
+			if (!c.updateTimeStamp(timeStamp))
 			{
 				continue;
 			}
