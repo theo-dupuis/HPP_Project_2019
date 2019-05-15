@@ -34,21 +34,10 @@ public class Global1 {
 				"2010-12-22T02:15:32.827+0000,I see,LOL\r\n" + 
 				"2010-12-22T02:15:33.827+0000,LOL,I see";
 	}
-	/** Basic 1 **/
-	@Test
-	public void test1_withoutFile() {
-
-		Expected_Output = "2010-12-22T02:15:31.827+0000,I see,-\r\n" + 
-				"2010-12-22T02:15:32.827+0000,I see,LOL\r\n" + 
-				"2010-12-22T02:15:33.827+0000,LOL,I see";
-		// TODO d = 7200 and k = 2
-		String output = "fail";
-		assertEquals(Expected_Output,output);
-	}
 	@Test
 	public void test1_withFile() {
-		// TODO d = 7200 and k = 2
-		
+		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
+		MyApp.main(args);
 		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
 		outputFilePath = url.getPath();
 		File outputfile = new File(outputFilePath);
@@ -60,5 +49,6 @@ public class Global1 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		outputfile.delete();
 	}
 }
