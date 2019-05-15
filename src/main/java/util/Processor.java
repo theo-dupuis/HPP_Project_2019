@@ -1,5 +1,7 @@
 package util;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import p2019.Comment;
@@ -40,7 +42,16 @@ public class Processor {
 		
 		User user;
 		Comment comment = MyApp.comments.get(commentID);
-		
+		Date date = null;
+		Date dateLimit = null;
+		try {
+			date = MyApp.dateFormat.parse(timeStamp);
+			dateLimit = new Date(date.getTime()-MyApp.duration*1000); // si le commentaire a ete posté avant datelimit, on ignore
+		} catch (ParseException e) {
+			System.out.println("Error while formatting timestamp");
+		}
+		if (comment.getCreationTimeStamp().before(dateLimit))
+			return;
 		comment.updateTimeStamp(timeStamp);
 		
 		if(MyApp.users.containsKey(userID))
@@ -71,8 +82,19 @@ public class Processor {
 		
 		user1.getFriends().add(user2);
 		user2.getFriends().add(user1);
-		
+		Date date = null;
+		Date datelimit = null;
+		try {
+			date = MyApp.dateFormat.parse(timeStamp);
+			datelimit = new Date(date.getTime()-MyApp.duration*1000); // si le commentaire a ete posté avant datelimit, on ignore
+		} catch (ParseException e) {
+			System.out.println("Error while formatting timestamp");
+		}
 		for(Comment c : user1.getComments()) {
+			if (c.getCreationTimeStamp().before(datelimit))
+			{
+				continue;
+			}
 			if(user2.getComments().contains(c)) {
 				c.communityMerge(user1, user2);
 				c.updateTimeStamp(timeStamp);
