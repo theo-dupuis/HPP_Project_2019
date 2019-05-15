@@ -1,7 +1,5 @@
 package util;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 import p2019.Comment;
@@ -40,19 +38,11 @@ public class Processor {
 		String userID = dataHolder[1];
 		String commentID = dataHolder[2];
 		
-		User user;
+		User user = putAndGet(userID);
 		Comment comment = MyApp.comments.get(commentID);
 		
 		if (!comment.updateTimeStamp(timeStamp))
 			return;
-		
-		if(MyApp.users.containsKey(userID))
-			user = MyApp.users.get(userID);
-		else {
-			user = new User(userID);
-			MyApp.users.put(userID, user);
-		}
-
 		
 		for(User u : user.getFriends()) {
 			if(comment.getCommunities().containsKey(u)) {
@@ -71,22 +61,9 @@ public class Processor {
 		String timeStamp = dataHolder[0];
 		String user1Id = dataHolder[1];
 		String user2Id = dataHolder[2];
-		User user1;
-		User user2;
 		
-		if(MyApp.users.containsKey(user1Id))
-			user1 = MyApp.users.get(user1Id);
-		else {
-			user1 = new User(user1Id);
-			MyApp.users.put(user1Id, user1);
-		}
-		
-		if(MyApp.users.containsKey(user2Id))
-			user2 = MyApp.users.get(user2Id);
-		else {
-			user2 = new User(user2Id);
-			MyApp.users.put(user2Id, user2);
-		}
+		User user1 = putAndGet(user1Id);
+		User user2 = putAndGet(user2Id);
 		
 		user1.getFriends().add(user2);
 		user2.getFriends().add(user1);
@@ -101,5 +78,18 @@ public class Processor {
 				c.updateTimeStamp(timeStamp);
 			}
 		}
+	}
+	
+	public static User putAndGet(String id) {
+		User user;
+		
+		if(MyApp.users.containsKey(id))
+			user = MyApp.users.get(id);
+		else {
+			user = new User(id);
+			MyApp.users.put(id, user);
+		}
+		return user;
+		
 	}
 }
