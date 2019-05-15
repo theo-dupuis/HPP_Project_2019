@@ -97,9 +97,14 @@ public class Comment {
 		Community comm = communities.get(user1);
 		comm.merge(communities.get(user2));
 		communities.put(user2, comm);
-		if (comm.getSize()> range)
+		sizeHasChanged(comm);
+	}
+	
+	public void sizeHasChanged(Community c)
+	{
+		if (c.getSize() > range)
 		{
-			range = comm.getSize();
+			range = c.getSize();
 		}
 	}
 }
