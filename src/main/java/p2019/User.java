@@ -1,9 +1,7 @@
-package graph;
+package p2019;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import p2019.Comment;
 
 public class User {
 	

@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import util.FileType;
+
 public class FileTypeTest {
 
 	@Test

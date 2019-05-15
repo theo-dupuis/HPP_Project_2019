@@ -1,11 +1,11 @@
-package Util;
+package util;
 
 import java.util.regex.Pattern;
 
-import graph.User;
 import p2019.Comment;
 import p2019.Community;
 import p2019.MyApp;
+import p2019.User;
 
 public class Processor {
 	

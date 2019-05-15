@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 public enum FileType {
 	Friendship("friendship"), Comment("comment"), Like("like");

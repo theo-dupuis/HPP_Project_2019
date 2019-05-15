@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import graph.User;
-
 public class Comment {
 	
 	private String id;

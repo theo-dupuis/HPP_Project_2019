@@ -7,6 +7,8 @@ import java.net.URL;
 
 import org.junit.Test;
 
+import util.Reader;
+
 public class readerTest {
 
 	@Test
