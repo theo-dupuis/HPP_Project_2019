@@ -47,7 +47,7 @@ public class Global4 {
 		try {
 			// expectedLinesOutputInFile
 			String eLOIF = new String(Files.readAllBytes(Paths.get(outputFilePath)));
-			assertEquals(eLOIF,Expected_Output);
+			assertEquals(Expected_Output,eLOIF);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
