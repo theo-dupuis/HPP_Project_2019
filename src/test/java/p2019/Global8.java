@@ -18,7 +18,7 @@ public class Global8 {
 	String friendshipsPath="";
 	String likesPath="";
 	String Expected_Output="";
-	String outputFilePath="";
+	String outputFilePath="Output.txt";
 	@Before
 	public void pathCreation() {
 		commentsPath = "Test_Cases/T8_comments.dat";
