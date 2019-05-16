@@ -40,6 +40,8 @@ public class Global7 {
 	/** Graph weigth multiple event **/
 	@Test
 	public void test_withFile() {
+		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
+		MyApp.main(args);
 		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
 		outputFilePath = url.getPath();
 		// TODO d = 7200 and k = 2

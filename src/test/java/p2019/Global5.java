@@ -38,6 +38,8 @@ public class Global5{
 	/**  noLike friendship after**/
 	@Test
 	public void test1_withFile() {
+		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
+		MyApp.main(args);
 		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
 		outputFilePath = url.getPath();
 		// TODO d = 7200 and k = 2

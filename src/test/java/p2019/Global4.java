@@ -40,6 +40,8 @@ public class Global4 {
 	/** Friendships **/
 	@Test
 	public void test2_withFile() {
+		String[] args = {"3","2",commentsPath,likesPath,friendshipsPath};
+		MyApp.main(args);
 		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
 		outputFilePath = url.getPath();
 		// TODO d = 3 and k = 2
