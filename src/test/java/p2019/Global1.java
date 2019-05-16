@@ -33,7 +33,7 @@ public class Global1 {
 
 		Expected_Output = "2010-12-22T02:15:31.827+0000,I see,-\r\n" + 
 				"2010-12-22T02:15:32.827+0000,I see,LOL\r\n" + 
-				"2010-12-22T02:15:33.827+0000,LOL,I see";
+				"2010-12-22T02:15:33.827+0000,LOL,I see\r\n";
 	}
 	@Test
 	public void test1_withFile() {
