@@ -1,28 +1,28 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class EventBuffer {
-	private BlockingQueue<Event> queue;
+	private List<Event> queue = new ArrayList<>();
 	
 	public EventBuffer() {
 		
 	}
 	
 	public void add(Event e) {
-		try {
-			queue.put(e);
-		} catch (InterruptedException e1) {
-			System.out.println("Error while adding to queue");
-		}
+		queue.add(e);
+	}
+	
+	public void insert(Event e) {
+		queue.add(0,e);
 	}
 	
 	public Event take() {
-		try {
-			return queue.take();
-		} catch (InterruptedException e) {
-			System.out.println(e);
-			return null;
-		}
+		if(!queue.isEmpty())
+			return queue.remove(0);
+		return null;
 	}
 }

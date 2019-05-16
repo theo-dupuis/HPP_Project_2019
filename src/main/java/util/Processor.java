@@ -1,5 +1,9 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import p2019.Comment;
@@ -8,7 +12,55 @@ import p2019.MyApp;
 import p2019.User;
 
 public class Processor {
-	
+
+	public static void launch(String... str) {
+		Reader commentReader = new Reader(FileType.Comment.toString(),str[0]);
+		Reader likeReader = new Reader(FileType.Like.toString(),str[1]);
+		Reader friendshipReader = new Reader(FileType.Friendship.toString(),str[2]);
+
+		String comment = commentReader.processLine();
+		String like = likeReader.processLine();
+		String friendship = friendshipReader.processLine();
+
+		List<String> list = new ArrayList<>();
+		list.add(comment);
+		list.add(like);
+		list.add(friendship);
+		while(comment != null || like != null || friendship != null) {
+			Collections.sort(list, comparatorTimeStamp);
+
+			String first = list.remove(0);
+			if(first.equals(comment)) {
+				process("comment", first);
+				comment = commentReader.processLine();
+				list.add(comment);
+			}
+			else if(first.equals(like)) {
+				process("like", first);
+				like = likeReader.processLine();
+				list.add(like);
+			}
+			else {
+				process("friendship", first);
+				friendship = friendshipReader.processLine();
+				list.add(friendship);
+			}
+		}
+
+	}
+
+	private static Comparator<String> comparatorTimeStamp = new Comparator<String>() {
+		@Override
+		public int compare(String a, String b) {
+			if(a == null)
+				return 1;
+			if(b == null)
+				return -1;
+
+			return a.split(Pattern.quote("|"))[0].compareTo(b.split(Pattern.quote("|"))[0]);
+		}
+	};
+
 	public static void process(String fileType, String data) {
 		switch (fileType) {
 		case "comment" :
@@ -25,7 +77,6 @@ public class Processor {
 			break;
 		}
 	}
-	
 	private static void processComment(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
 		MyApp.comments.put(dataHolder[1],new Comment(dataHolder[0],dataHolder[1],dataHolder[3]));
@@ -82,9 +133,9 @@ public class Processor {
 		}
 	}
 	
-	public static User putAndGet(String id) {
+	private static User putAndGet(String id) {
 		User user;
-		
+
 		if(MyApp.users.containsKey(id))
 			user = MyApp.users.get(id);
 		else {
@@ -92,6 +143,6 @@ public class Processor {
 			MyApp.users.put(id, user);
 		}
 		return user;
-		
+
 	}
 }

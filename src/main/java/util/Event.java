@@ -1,11 +1,16 @@
 package util;
 
+import java.util.regex.Pattern;
+
 public class Event {
-	private final String timeStamp;
-	private final String[] data;
+	public final String fileType;
+	public final String timeStamp;
+	public final String data;
 	
-	public Event(String[] data) {
-		this.timeStamp = data[0];
+	public Event(String fileType, String data) {
+		this.fileType = fileType;
+		this.timeStamp = data.split(Pattern.quote("|"))[0];
 		this.data = data;
 	}
+	
 }
