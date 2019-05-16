@@ -38,8 +38,6 @@ public class Global6{
 	public void test2_withFile() {
 		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
 		MyApp.main(args);
-		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
-		outputFilePath = url.getPath();
 		// TODO d = 7200 and k = 2
 		File outputfile = new File(outputFilePath);
 		assertTrue(outputfile.exists());
