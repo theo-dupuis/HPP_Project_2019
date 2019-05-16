@@ -121,10 +121,10 @@ public class Comment{
 			
 			communities = null;
 			MyApp.comments.remove(id);
-			
+
+			MyApp.rank.dropComment(this);
 			return false;
 		}
-		
 		return true;
 	}
 }

@@ -44,16 +44,15 @@ public class Processor {
 		if (!comment.updateTimeStamp(timeStamp))
 			return;
 		
+
+		Community c = new Community(user);
+		comment.getCommunities().put(user, c);
 		for(User u : user.getFriends()) {
 			if(comment.getCommunities().containsKey(u)) {
 				Community comm = comment.getCommunities().get(u);
-				comm.addUser(user);
-				comment.sizeHasChanged(comm);
-				return;
+				c.merge(comm);
 			}
 		}
-		Community c = new Community(user);
-		comment.getCommunities().put(user, c);
 		comment.sizeHasChanged(c);
 	}
 	

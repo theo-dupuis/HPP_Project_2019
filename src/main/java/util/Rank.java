@@ -12,8 +12,6 @@ import p2019.MyApp;
 
 public class Rank {
 
-	private File file;
-	private Writer writer;
 	
 	private Comparator<Comment> comparator = new Comparator<Comment>()
 	{
@@ -32,6 +30,19 @@ public class Rank {
 			}
         }
 	};
+	
+	private Comparator<Comment> comparatorByTime = new Comparator<Comment>()
+	{
+		@Override
+        public int compare(Comment comm1, Comment comm2)
+        {
+			return comm1.getCreationTimeStamp().compareTo(comm2.getCreationTimeStamp());
+        }
+	};
+	
+	private File file;
+	private Writer writer;
+	private long olderTimeStamp;
 	
 	private List<Comment> comments;
 	public Rank() {
@@ -59,6 +70,40 @@ public class Rank {
 		comments.add(c);
 		comments.sort(comparator);
 		output(c.getLastUpdateTimeStamp());
+	}
+	
+	public void checkOutdatedComment(Date timeStamp)
+	{
+		if (timeStamp.getTime()>olderTimeStamp+MyApp.duration*1000)
+		{
+			comments.sort(comparatorByTime.thenComparing(comparator));
+			int i=0;
+			List<Comment> drops=new ArrayList<>();
+			while (comments.size()>i && comments.get(i).getCreationTimeStamp().getTime()<=timeStamp.getTime())
+			{
+				while(comments.size()>i+1 && comparatorByTime.compare(comments.get(i), comments.get(i+1))==0)
+				{
+					comments.remove(i);
+				}
+				drops.add(comments.get(i));
+				i++;
+			}
+			comments.sort(comparator);
+			for(Comment c: drops)
+			{
+				dropComment(c);
+			}
+		}
+	}
+	
+	public void dropComment(Comment c)
+	{
+		if (comments.contains(c))
+		{
+			comments.remove(c);
+			
+			output(new Date(c.getCreationTimeStamp().getTime()+MyApp.duration*1000));
+		}
 	}
 	
 	public void output(Date timeStamp)
