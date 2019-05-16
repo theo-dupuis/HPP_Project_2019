@@ -37,7 +37,7 @@ public class Global8 {
 				"2010-12-22T02:14:42.827+0000,Theo is crazy,LOL,I see,I think Romain is more crazy than him\r\n" + 
 				"2010-12-22T02:15:29.827+0000,Theo is crazy,I think Romain is more crazy than him,LOL,I see\r\n" + 
 				"2010-12-22T02:15:30.827+0000,Theo is crazy,I think Romain is more crazy than him,I see,LOL\r\n" + 
-				"2010-12-22T02:15:38.001+0000,I think Romain is more crazy than him,Theo is crazy,I see,LOL";
+				"2010-12-22T02:15:38.001+0000,I think Romain is more crazy than him,Theo is crazy,I see,LOL\r\n";
 		
 	}
 	/** other k test **/
