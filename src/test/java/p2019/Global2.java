@@ -18,7 +18,7 @@ public class Global2 {
 	String friendshipsPath="";
 	String likesPath="";
 	String Expected_Output="";
-	String outputFilePath="";
+	String outputFilePath="Output.txt";
 	@Before
 	public void pathCreation() {
 		commentsPath = "Test_Cases/T2_comments.dat";
@@ -33,7 +33,7 @@ public class Global2 {
 
 		Expected_Output = "2010-12-22T02:15:31.827+0000,I see,-\r\n" + 
 				"2010-12-22T02:15:32.827+0000,I see,LOL\r\n" + 
-				"2010-12-22T02:17:00.827+0000,LOL,I see";
+				"2010-12-22T02:17:00.827+0000,LOL,I see\r\n";
 		outputFilePath = "output.txt";
 	}
 	/** Basic 2 **/
