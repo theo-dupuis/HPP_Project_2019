@@ -63,7 +63,7 @@ public class Rank {
 	public void output(Date timeStamp)
 	{
 		StringBuilder str = new StringBuilder();
-		str.append(timeStamp.toString());
+		str.append(MyApp.dateFormat.format(timeStamp));
 		for(int i=comments.size()-1;i>=0;i--)
 		{
 			str.append(","+comments.get(i).getContent());
