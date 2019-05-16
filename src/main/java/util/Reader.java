@@ -7,17 +7,20 @@ import java.io.IOException;
 
 public class Reader {
 	private String fileType;
+	private File file;
 	
-	public Reader(String fileType) {
+	public Reader(String fileType, String fileName) {
 		this.fileType = fileType;
+		this.file = new File(fileName);
+		
+		processFile();
 	}
 
-	public void processFile(String fileName) {
+	private void processFile() {
 		String data = "";
 		
-		File file = new File(fileName);
-		
 		try {
+			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while ((data = br.readLine()) != null)
 				if(!data.isEmpty())
