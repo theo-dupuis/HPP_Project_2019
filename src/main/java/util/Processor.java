@@ -50,10 +50,11 @@ public class Processor {
 		for(User u : user.getFriends()) {
 			if(comment.getCommunities().containsKey(u)) {
 				Community comm = comment.getCommunities().get(u);
-				c.merge(comm);
+				comm.merge(c);
+				comment.getCommunities().put(user, comm);
 			}
 		}
-		comment.sizeHasChanged(c);
+		comment.sizeHasChanged(comment.getCommunities().get(user));
 	}
 	
 	private static void processFriendship(String data) {

@@ -64,12 +64,25 @@ public class Rank {
 		{
 			if (c.getRange()<comments.get(0).getRange())
 				return;
-			if (!comments.remove(c))
+			if (comments.contains(c))
+			{
+				int i=comments.indexOf(c);
+				if (comparator.compare(c, comments.get(i+1))<0)
+					return;
+				else
+					comments.remove(c);
+			}
+			else
 				comments.remove(0);
 		}
-		comments.add(c);
-		comments.sort(comparator);
-		output(c.getLastUpdateTimeStamp());
+		else
+		{
+			if (comments.contains(c))
+				return;
+			comments.add(c);
+			comments.sort(comparator);
+			output(c.getLastUpdateTimeStamp());
+		}
 	}
 	
 	public void checkOutdatedComment(Date timeStamp)
