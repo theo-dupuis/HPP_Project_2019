@@ -10,6 +10,7 @@ public class Community {
 	
 	public Community(User user) {
 		users.add(user);
+		size = 1;
 	}
 	public Community() {
 		

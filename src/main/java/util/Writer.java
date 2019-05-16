@@ -17,8 +17,8 @@ public class Writer {
         	if(file.exists()) {
 				try {
 					bw = new BufferedWriter(new FileWriter(file, true));
-					bw.append("\r\n");
 		        	bw.append(data);
+					bw.append("\r\n");
 		            bw.close();
 				} catch (IOException e) {
 					System.out.println("Error while writing");

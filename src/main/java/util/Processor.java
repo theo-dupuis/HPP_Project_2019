@@ -52,7 +52,9 @@ public class Processor {
 				return;
 			}
 		}
-		comment.getCommunities().put(user, new Community(user));
+		Community c = new Community(user);
+		comment.getCommunities().put(user, c);
+		comment.sizeHasChanged(c);
 	}
 	
 	private static void processFriendship(String data) {
