@@ -19,7 +19,7 @@ public class Global7 {
 	String friendshipsPath="";
 	String likesPath="";
 	String Expected_Output="";
-	String outputFilePath="";
+	String outputFilePath="Output.txt";
 	@Before
 	public void pathCreation() {
 		commentsPath = "Test_Cases/T7_comments.dat";
@@ -35,7 +35,6 @@ public class Global7 {
 		Expected_Output = "2010-12-22T02:14:38.827+0000,Theo is crazy,-\r\n" + 
 				"2010-12-22T02:14:40.827+0000,Theo is crazy,I think Romain is more crazy than him\r\n" + 
 				"2010-12-22T02:15:38.001+0000,I think Romain is more crazy than him,Theo is crazy\r\n";
-		outputFilePath = "output.txt";
 	}
 	/** Graph weigth multiple event **/
 	@Test

@@ -18,7 +18,7 @@ public class Global4 {
 	String friendshipsPath="";
 	String likesPath="";
 	String Expected_Output="";
-	String outputFilePath="";
+	String outputFilePath="Output.txt";
 	@Before
 	public void pathCreation() {
 		commentsPath = "Test_Cases/T4_comments.dat";
@@ -34,7 +34,6 @@ public class Global4 {
 		Expected_Output = "2010-12-22T02:14:33.000+0000,I see,-\r\n" + 
 						"2010-12-22T02:14:35.000+0000,I see,LOL\r\n" + 
 						"2010-12-22T02:14:35.001+0000,LOL,-\r\n";
-		outputFilePath = "output.txt";
 	}
 	/** exceed limit by 1 ms **/
 	/** Friendships **/

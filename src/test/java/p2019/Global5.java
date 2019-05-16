@@ -19,7 +19,7 @@ public class Global5{
 	String friendshipsPath="";
 	String likesPath="";
 	String Expected_Output="";
-	String outputFilePath="";
+	String outputFilePath="Output.txt";
 	@Before
 	public void pathCreation() {
 		commentsPath = "Test_Cases/T5_comments.dat";
@@ -33,7 +33,6 @@ public class Global5{
 		likesPath = url.getPath();
 
 		Expected_Output = "";
-		outputFilePath = "output.txt";
 	}
 	/**  noLike friendship after**/
 	@Test
