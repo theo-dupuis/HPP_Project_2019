@@ -20,7 +20,8 @@ public class Reader {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while ((data = br.readLine()) != null)
-				Processor.process(fileType, data);
+				if(!data.isEmpty())
+					Processor.process(fileType, data);
 			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
