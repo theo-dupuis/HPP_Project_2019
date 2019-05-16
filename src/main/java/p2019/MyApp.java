@@ -30,7 +30,7 @@ public class MyApp {
 		Reader friendshipReader = new Reader(FileType.Friendship.toString());
 		
 		commentReader.processFile(fileNameComment);
-		likeReader.processFile(fileNameLike);
 		friendshipReader.processFile(fileNameFriendship);
+		likeReader.processFile(fileNameLike);
 	}
 }

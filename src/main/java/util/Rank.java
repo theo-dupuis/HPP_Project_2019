@@ -22,7 +22,7 @@ public class Rank {
         {
 			if (comm1.getRange()==comm2.getRange())
 			{
-				return comm1.getContent().compareTo(comm2.getContent());
+				return comm2.getContent().compareTo(comm1.getContent());
 			}
 			else
 			{
@@ -53,7 +53,8 @@ public class Rank {
 		{
 			if (c.getRange()<comments.get(0).getRange())
 				return;
-			comments.remove(0);
+			if (!comments.remove(c))
+				comments.remove(0);
 		}
 		comments.add(c);
 		comments.sort(comparator);
