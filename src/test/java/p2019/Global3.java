@@ -41,7 +41,7 @@ public class Global3 {
 	public void test1_withFile() {
 		String[] args = {"3","2",commentsPath,likesPath,friendshipsPath};
 		MyApp.main(args);
-		// TODO d = 3 and k = 2
+		// TODO need to work
 		File outputfile = new File(outputFilePath);
 		assertTrue(outputfile.exists());
 		try {

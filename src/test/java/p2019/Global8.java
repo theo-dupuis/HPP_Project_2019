@@ -45,7 +45,7 @@ public class Global8 {
 	public void test_withFile() {
 		String[] args = {"7200","4",commentsPath,likesPath,friendshipsPath};
 		MyApp.main(args);
-		// TODO d = 7200 and k = 4
+		// TODO need to work
 		File outputfile = new File(outputFilePath);
 		assertTrue(outputfile.exists());
 		try {

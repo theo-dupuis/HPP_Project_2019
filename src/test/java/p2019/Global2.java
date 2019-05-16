@@ -40,7 +40,6 @@ public class Global2 {
 	public void test_withFile() {
 		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
 		MyApp.main(args);
-		// TODO d = 7200 and k = 2
 		File outputfile = new File(outputFilePath);
 		assertTrue(outputfile.exists());
 		try {
