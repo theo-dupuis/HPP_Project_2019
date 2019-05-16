@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import util.EventBuffer;
+import util.EventProcessor;
 import util.FileType;
+import util.Processor;
 import util.Rank;
 import util.Reader;
 
@@ -31,9 +33,11 @@ public class MyApp {
 		String fileNameLike = args[3];
 		String fileNameFriendship = args[4];
 		
-		new Reader(FileType.Comment.toString(),fileNameComment);
-		new Reader(FileType.Like.toString(),fileNameFriendship);
-		new Reader(FileType.Friendship.toString(),fileNameLike);
+//		new Reader(FileType.Comment.toString(),fileNameComment);
+//		new Reader(FileType.Like.toString(),fileNameFriendship);
+//		new Reader(FileType.Friendship.toString(),fileNameLike);
+		
+		Processor.launch(fileNameComment,fileNameLike,fileNameFriendship);
 		
 		
 	}
