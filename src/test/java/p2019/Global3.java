@@ -9,6 +9,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,12 +39,6 @@ public class Global3 {
 	/** exceed limit by 1 ms **/
 	/** Likes **/
 	@Test
-	public void test1_withoutFile() {
-		// TODO d = 3 and k = 2
-		String output = "fail";
-		assertEquals(Expected_Output,output);
-	}
-	@Test
 	public void test1_withFile() {
 		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
 		outputFilePath = url.getPath();
@@ -57,5 +52,10 @@ public class Global3 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@After
+	public void removeFile() {
+		File outputfile = new File(outputFilePath);
+		outputfile.delete();
 	}
 }

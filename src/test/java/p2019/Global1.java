@@ -9,6 +9,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,6 +50,10 @@ public class Global1 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@After
+	public void removeFile() {
+		File outputfile = new File(outputFilePath);
 		outputfile.delete();
 	}
 }

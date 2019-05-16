@@ -8,6 +8,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,13 +36,8 @@ public class Global4 {
 						"2010-12-22T02:14:35.001+0000,LOL,-";
 		outputFilePath = "output.txt";
 	}
+	/** exceed limit by 1 ms **/
 	/** Friendships **/
-	@Test
-	public void test2_withoutFile() {
-		// TODO d = 3 and k = 2
-		String output = "fail";
-		assertEquals(Expected_Output,output);
-	}
 	@Test
 	public void test2_withFile() {
 		URL url = Thread.currentThread().getContextClassLoader().getResource(outputFilePath);
@@ -56,5 +52,10 @@ public class Global4 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@After
+	public void removeFile() {
+		File outputfile = new File(outputFilePath);
+		outputfile.delete();
 	}
 }
