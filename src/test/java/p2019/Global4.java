@@ -32,8 +32,7 @@ public class Global4 {
 		likesPath = url.getPath();
 
 		Expected_Output = "2010-12-22T02:14:33.000+0000,I see,-\r\n" + 
-						"2010-12-22T02:14:34.000+0000,I see,LOL\r\n" +  
-						"2010-12-22T02:14:34.500+0000,I see,LOL\r\n" +
+						"2010-12-22T02:14:34.254+0000,I see,LOL\r\n" +
 						"2010-12-22T02:14:35.000+0000,LOL,-\r\n";
 	}
 	/** exceed limit by 1 ms **/
