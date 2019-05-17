@@ -67,7 +67,7 @@ public class Rank {
 			if (comments.contains(c))
 			{
 				int i=comments.indexOf(c);
-				if (comparator.compare(c, comments.get(i+1))<0)
+				if (i == comments.size()-1 || comparator.compare(c, comments.get(i+1))<0)
 					return;
 				else
 					comments.remove(c);
