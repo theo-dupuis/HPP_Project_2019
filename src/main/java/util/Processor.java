@@ -31,22 +31,25 @@ public class Processor {
 
 			String first = list.remove(0);
 			if(first.equals(comment)) {
-				process("comment", first);
+				processComment(first);
 				comment = commentReader.processLine();
 				list.add(comment);
 			}
 			else if(first.equals(like)) {
-				process("like", first);
+				processLike(first);
 				like = likeReader.processLine();
 				list.add(like);
 			}
 			else {
-				process("friendship", first);
+				processFriendship(first);
 				friendship = friendshipReader.processLine();
 				list.add(friendship);
 			}
 		}
-
+		
+		commentReader.releaseReader();
+		likeReader.releaseReader();
+		friendshipReader.releaseReader();
 	}
 
 	private static Comparator<String> comparatorTimeStamp = new Comparator<String>() {
@@ -60,23 +63,7 @@ public class Processor {
 			return a.split(Pattern.quote("|"))[0].compareTo(b.split(Pattern.quote("|"))[0]);
 		}
 	};
-
-	public static void process(String fileType, String data) {
-		switch (fileType) {
-		case "comment" :
-			processComment(data);
-			break;
-		case "like" :
-			processLike(data);
-			break;
-		case "friendship" :
-			processFriendship(data);
-			break;
-		default:
-			System.out.println("fileType not recognized");
-			break;
-		}
-	}
+	
 	private static void processComment(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
 		MyApp.comments.put(dataHolder[1],new Comment(dataHolder[0],dataHolder[1],dataHolder[3]));

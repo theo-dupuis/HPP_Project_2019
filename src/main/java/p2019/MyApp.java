@@ -37,8 +37,6 @@ public class MyApp {
 //		new Reader(FileType.Like.toString(),fileNameFriendship);
 //		new Reader(FileType.Friendship.toString(),fileNameLike);
 		
-		Processor.launch(fileNameComment,fileNameLike,fileNameFriendship);
-		
-		
+		Processor.launch(fileNameComment,fileNameLike,fileNameFriendship);		
 	}
 }
