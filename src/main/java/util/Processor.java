@@ -143,6 +143,6 @@ public class Processor {
 		Iterator<String> it = MyApp.comments.keySet().iterator();
 		while(it.hasNext())
 			if(!MyApp.comments.get(it.next()).updateTimeStamp(ts))
-				MyApp.comments.remove(it.next());
+				it.remove();
 	}
 }
