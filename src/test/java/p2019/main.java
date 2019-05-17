@@ -32,7 +32,7 @@ public class main {
 	}
 	@Test
 	public void test1_withFile() {
-		String[] args = {"7200","2",commentsPath,likesPath,friendshipsPath};
+		String[] args = {"3600","5",commentsPath,likesPath,friendshipsPath};
 		MyApp.main(args);
 		File outputfile = new File(outputFilePath);
 		assertTrue(outputfile.exists());
