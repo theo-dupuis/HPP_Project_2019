@@ -109,3 +109,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
+src/test/resources/Test_Cases/comments.dat
+src/test/resources/Test_Cases/friendships.dat
+src/test/resources/Test_Cases/likes.dat
