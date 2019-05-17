@@ -3,6 +3,7 @@ package util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -139,8 +140,9 @@ public class Processor {
 	}
 	
 	private static void clearCommentList(String ts) {
-		for(String id : MyApp.comments.keySet())
-			if(!MyApp.comments.get(id).updateTimeStamp(ts))
-				MyApp.comments.remove(id);
+		Iterator<String> it = MyApp.comments.keySet().iterator();
+		while(it.hasNext())
+			if(!MyApp.comments.get(it.next()).updateTimeStamp(ts))
+				MyApp.comments.remove(it.next());
 	}
 }
