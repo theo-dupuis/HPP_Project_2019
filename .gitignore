@@ -112,3 +112,4 @@ buildNumber.properties
 src/test/resources/Test_Cases/comments.dat
 src/test/resources/Test_Cases/friendships.dat
 src/test/resources/Test_Cases/likes.dat
+Output.txt
