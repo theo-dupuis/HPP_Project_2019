@@ -19,24 +19,6 @@ public class Reader {
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		}
-		
-		processLine();
-	}
-
-	private void processFile() {
-		String data = "";
-		
-		try {
-			@SuppressWarnings("resource")
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			while ((data = br.readLine()) != null)
-				if(!data.isEmpty())
-					Processor.process(fileType, data);
-			
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-
 	}
 	
 	public String processLine() {
@@ -50,7 +32,16 @@ public class Reader {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+		
 		return null;
-
+	}
+	
+	public void releaseReader() {
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
