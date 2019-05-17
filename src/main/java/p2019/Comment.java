@@ -116,7 +116,7 @@ public class Comment{
 	
 	private boolean isAlive() {
 		if(lastUpdateTimeStamp.getTime() - creationTimeStamp.getTime() > MyApp.duration*1000) {
-			if(communities.keySet() != null)
+			if(communities !=null && communities.keySet() != null)
 				for(User u : communities.keySet())
 					u.getComments().remove(this);
 			
