@@ -77,12 +77,13 @@ public class Processor {
 		String commentID = dataHolder[2];
 		
 		User user = putAndGet(userID);
-		Comment comment = MyApp.comments.get(commentID);
-		user.getComments().add(comment);
-		if (!comment.updateTimeStamp(timeStamp))
+		Comment comment = isAliveAndGet(commentID);
+		
+		if(comment == null || !comment.updateTimeStamp(timeStamp))
 			return;
 		
-
+		user.getComments().add(comment);
+		
 		Community c = new Community(user);
 		comment.getCommunities().put(user, c);
 		for(User u : user.getFriends()) {
@@ -131,5 +132,12 @@ public class Processor {
 		}
 		
 		return user;
+	}
+	
+	private static Comment isAliveAndGet(String commentID) {
+		if(MyApp.comments.containsKey(commentID))
+			return MyApp.comments.get(commentID);
+		else
+			return null;
 	}
 }
