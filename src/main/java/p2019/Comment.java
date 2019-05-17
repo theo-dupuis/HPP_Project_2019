@@ -120,7 +120,6 @@ public class Comment{
 				u.getComments().remove(this);
 			
 			communities = null;
-			MyApp.comments.remove(id);
 			MyApp.rank.dropComment(this);
 			
 			return false;

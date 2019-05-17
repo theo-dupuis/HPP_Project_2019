@@ -140,6 +140,7 @@ public class Processor {
 	
 	private static void clearCommentList(String ts) {
 		for(String id : MyApp.comments.keySet())
-			MyApp.comments.get(id).updateTimeStamp(ts);
+			if(!MyApp.comments.get(id).updateTimeStamp(ts))
+				MyApp.comments.remove(id);
 	}
 }
