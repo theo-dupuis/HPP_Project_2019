@@ -103,6 +103,8 @@ public class Processor {
 		String user1Id = dataHolder[1];
 		String user2Id = dataHolder[2];
 		
+		clearCommentList(timeStamp);
+		
 		User user1 = putAndGet(user1Id);
 		User user2 = putAndGet(user2Id);
 		
@@ -110,13 +112,8 @@ public class Processor {
 		user2.getFriends().add(user1);
 		
 		for(Comment c : user1.getComments()) {
-			if (!c.updateTimeStamp(timeStamp))
-			{
-				continue;
-			}
 			if(user2.getComments().contains(c)) {
 				c.communityMerge(user1, user2);
-				c.updateTimeStamp(timeStamp);
 			}
 		}
 	}
@@ -139,5 +136,10 @@ public class Processor {
 			return MyApp.comments.get(commentID);
 		else
 			return null;
+	}
+	
+	private static void clearCommentList(String ts) {
+		for(String id : MyApp.comments.keySet())
+			MyApp.comments.get(id).updateTimeStamp(ts);
 	}
 }
