@@ -33,7 +33,7 @@ public class Global2 {
 
 		Expected_Output = "2010-12-22T02:15:31.827+0000,I see,-\r\n" + 
 				"2010-12-22T02:15:32.827+0000,I see,LOL\r\n" + 
-				"2010-12-22T02:17:00.827+0000,LOL,I see\r\n";
+				"2010-12-22T02:16:00.827+0000,LOL,I see\r\n";
 	}
 	/** Basic 2 **/
 	@Test
