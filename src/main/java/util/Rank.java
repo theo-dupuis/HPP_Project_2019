@@ -79,10 +79,10 @@ public class Rank {
 		{
 			if (comments.contains(c))
 				return;
-			comments.add(c);
-			comments.sort(comparator);
-			output(c.getLastUpdateTimeStamp());
 		}
+		comments.add(c);
+		comments.sort(comparator);
+		output(c.getLastUpdateTimeStamp());
 	}
 	
 	public void checkOutdatedComment(Date timeStamp)
