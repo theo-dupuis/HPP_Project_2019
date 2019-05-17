@@ -78,7 +78,7 @@ public class Processor {
 		
 		User user = putAndGet(userID);
 		Comment comment = MyApp.comments.get(commentID);
-		
+		user.getComments().add(comment);
 		if (!comment.updateTimeStamp(timeStamp))
 			return;
 		
