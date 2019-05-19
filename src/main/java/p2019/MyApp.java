@@ -3,8 +3,12 @@ package p2019;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
-import util.Processor;
+import thread.CacheProcessorThread;
+import thread.ProcessorThread;
+import thread.ReaderThread;
 import util.Rank;
 
 public class MyApp {
@@ -18,13 +22,33 @@ public class MyApp {
 	public static int k;
 	
 	public static void main(String[] args) {
+		
+		// Variables initialization :
 		duration = Integer.parseInt(args[0]);
 		k = Integer.parseInt(args[1]);
-		
 		String fileNameComment = args[2];
 		String fileNameLike = args[3];
 		String fileNameFriendship = args[4];
 		
-		Processor.launch(fileNameComment,fileNameLike,fileNameFriendship);		
+		// Caches initialization :
+		String comment = null;
+		String like = null;
+		String friendship = null;
+		
+		//Queue initialization :
+		BlockingQueue<String> processQueue = new LinkedBlockingDeque<>();
+		
+		// READER THREAD (fill up the (string) caches)
+		//new Thread(new ReaderThread(comment,like,friendship,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD").start();
+		
+		// PROCESS READER THREAD (sort caches by time stamp and fill up the queue)
+		//new Thread(new CacheProcessorThread(processQueue,comment,like,friendship), "PROCESS READER THREAD").start();
+		new Thread(new CacheProcessorThread(processQueue,fileNameComment,fileNameLike,fileNameFriendship), "PROCESS READER THREAD").start();
+		
+		// PROCESS QUEUE THREAD (process items in queue)
+		new Thread(new ProcessorThread(processQueue), "PROCESS THREAD").start();
+		
+		// RANK AND OUTPUT THREAD
+		// Rank & Outuput are handled by the main thread ?
 	}
 }

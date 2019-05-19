@@ -1,10 +1,6 @@
 package util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import p2019.Comment;
@@ -13,64 +9,13 @@ import p2019.MyApp;
 import p2019.User;
 
 public class Processor {
-
-	public static void launch(String... str) {
-		Reader commentReader = new Reader(FileType.Comment.toString(),str[0]);
-		Reader likeReader = new Reader(FileType.Like.toString(),str[1]);
-		Reader friendshipReader = new Reader(FileType.Friendship.toString(),str[2]);
-
-		String comment = commentReader.processLine();
-		String like = likeReader.processLine();
-		String friendship = friendshipReader.processLine();
-
-		List<String> list = new ArrayList<>();
-		list.add(comment);
-		list.add(like);
-		list.add(friendship);
-		while(comment != null || like != null || friendship != null) {
-			Collections.sort(list, comparatorTimeStamp);
-
-			String first = list.remove(0);
-			if(first.equals(comment)) {
-				processComment(first);
-				comment = commentReader.processLine();
-				list.add(comment);
-			}
-			else if(first.equals(like)) {
-				processLike(first);
-				like = likeReader.processLine();
-				list.add(like);
-			}
-			else {
-				processFriendship(first);
-				friendship = friendshipReader.processLine();
-				list.add(friendship);
-			}
-		}
-		
-		commentReader.releaseReader();
-		likeReader.releaseReader();
-		friendshipReader.releaseReader();
-	}
-
-	private static Comparator<String> comparatorTimeStamp = new Comparator<String>() {
-		@Override
-		public int compare(String a, String b) {
-			if(a == null)
-				return 1;
-			if(b == null)
-				return -1;
-
-			return a.split(Pattern.quote("|"))[0].compareTo(b.split(Pattern.quote("|"))[0]);
-		}
-	};
 	
-	private static void processComment(String data) {
+	public static void processComment(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
 		MyApp.comments.put(dataHolder[1],new Comment(dataHolder[0],dataHolder[1],dataHolder[3]));
 	}
 	
-	private static void processLike(String data) {
+	public static void processLike(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
 		
 		String timeStamp = dataHolder[0];
@@ -97,7 +42,7 @@ public class Processor {
 		comment.sizeHasChanged(comment.getCommunities().get(user));
 	}
 	
-	private static void processFriendship(String data) {
+	public static void processFriendship(String data) {
 		String[] dataHolder = data.split(Pattern.quote("|"));
 		
 		String timeStamp = dataHolder[0];

@@ -7,12 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Reader {
-	private String fileType;
 	private File file;
 	private BufferedReader br;
 	
-	public Reader(String fileType, String fileName) {
-		this.fileType = fileType;
+	public Reader(String fileName) {
 		this.file = new File(fileName);
 		try {
 			this.br = new BufferedReader(new FileReader(file));

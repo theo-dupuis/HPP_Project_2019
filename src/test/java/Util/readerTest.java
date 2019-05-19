@@ -13,7 +13,7 @@ public class readerTest {
 		URL url = Thread.currentThread().getContextClassLoader().getResource("Test_Cases/T1_comments.dat");
 		String fileToReadPath = url.getPath();
 		String firstLineStringReaded = "2010-12-22T02:14:32.827+0000|34359738627|99|I see|Baoping Wu||529360";
-		Reader reader = new Reader("comment", fileToReadPath);
+		Reader reader = new Reader(fileToReadPath);
 		// TODO verification of a added queue object
 	}
 
