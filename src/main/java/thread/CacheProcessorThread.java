@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.regex.Pattern;
 
+import util.Cache;
 import util.Reader;
 
 public class CacheProcessorThread implements Runnable {
@@ -14,32 +15,17 @@ public class CacheProcessorThread implements Runnable {
 	String comment;
 	String like;
 	String friendship;
-	
+
 	Reader commentReader;
 	Reader likeReader;
 	Reader friendshipReader;
 
 	BlockingQueue<String> processQueue;
-	final Object lock = new Object();
+	Cache cache;
 
-	public CacheProcessorThread(BlockingQueue<String> process) {
-		comment = commentReader.processLine();
-		like = likeReader.processLine();
-		friendship = friendshipReader.processLine();
+	public CacheProcessorThread(Cache c, BlockingQueue<String> process) {
 
-		processQueue = process;
-	}
-	
-	public CacheProcessorThread(BlockingQueue<String> process, String...strings) {
-		
-		commentReader = new Reader(strings[0]);
-		likeReader = new Reader(strings[1]);
-		friendshipReader = new Reader(strings[2]);
-		
-		comment = commentReader.processLine();
-		like = likeReader.processLine();
-		friendship = friendshipReader.processLine();
-
+		cache = c;
 		processQueue = process;
 	}
 
@@ -47,45 +33,69 @@ public class CacheProcessorThread implements Runnable {
 	public void run() {
 		List<String> list = new ArrayList<>();
 		String first = null;
-		list.add(comment);
-		list.add(like);
-		list.add(friendship);
+		String type = "";
+		comment = cache.comment;
+		like = cache.like;
+		friendship = cache.friendship;
 
 		while(comment != null || like != null || friendship != null) {
-			Collections.sort(list, comparatorTimeStamp);
+			if(!cache.signal) {
+				switch (type) {
+				case "C|":
+					comment = cache.comment;
+					list.add(comment);
+					break;
+				case "L|":
+					like = cache.like;
+					list.add(like);
+					break;
+				case  "F|":
+					friendship = cache.friendship;
+					list.add(friendship);
+					break;
 
-			first = list.remove(0);
+				default:
+					list.add(comment);
+					list.add(like);
+					list.add(friendship);
+					break;
+				}
+				
+				Collections.sort(list, comparatorTimeStamp);
 
-			if(first.equals(comment)) {
-				first = "C|"+first;
-				comment = commentReader.processLine();
-				list.add(comment);
-			}
-			else if(first.equals(like)) {
-				first = "L|"+first;
-				like = likeReader.processLine();
-				list.add(like);
-			}
-			else {
-				first = "F|"+first;
-				friendship = friendshipReader.processLine();
-				list.add(friendship);
-			}
+				first = list.remove(0); //Might trigger a NPE ?
+				
 
-			try {
-				processQueue.put(first);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				if(first.equals(comment)) {
+					type = "C|";
+					cache.comment = null;
+				} else if(first.equals(like)) {
+					type = "L|";
+					cache.like = null;
+				} else {
+					type = "F|";
+					cache.friendship = null;
+				}
+
+				try {
+					processQueue.put(type + first);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				cache.signal = true;
 			}
 		}
-
+		
 		try {
 			processQueue.put("END");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 	}
 
 	private Comparator<String> comparatorTimeStamp = new Comparator<String>() {

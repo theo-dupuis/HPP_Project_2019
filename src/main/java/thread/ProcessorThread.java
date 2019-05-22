@@ -32,6 +32,7 @@ public class ProcessorThread implements Runnable {
 	private void processData(String data) {
 		String[] split = data.split(Pattern.quote("|"), 2);
 		String identifier = split[0];
+		System.out.println(split[1]);
 		
 		switch (identifier) {
 		case "C":

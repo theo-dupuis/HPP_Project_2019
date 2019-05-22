@@ -1,57 +1,53 @@
 package thread;
 
 
+import util.Cache;
 import util.Reader;
 
 public class ReaderThread implements Runnable {
-
-	String comment;
-	String like;
-	String friendship;
+	
+	String tempComment;
+	String tempLike;
+	String tempFriendship;
 
 	Reader commentReader;
 	Reader likeReader;
 	Reader friendshipReader;
+	
+	Cache cache;
 
-	public ReaderThread(String...strings) {
-		comment = strings[0];
-		like = strings[1];
-		friendship = strings[2];
+	public ReaderThread(Cache c, String...strings) {
 
-		commentReader = new Reader(strings[3]);
-		likeReader = new Reader(strings[4]);
-		friendshipReader = new Reader(strings[5]);
-
+		cache = c;
+		commentReader = new Reader(strings[0]);
+		likeReader = new Reader(strings[1]);
+		friendshipReader = new Reader(strings[2]);
+		
+		cache.comment = commentReader.processLine();
+		cache.like = likeReader.processLine();
+		cache.friendship = friendshipReader.processLine();
 	}
 
 	@Override
 	public void run() {
-		// Ensure caches not null
-		comment = commentReader.processLine();
-		like = likeReader.processLine();
-		friendship = friendshipReader.processLine();
-
-		try {
-			wait();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch blo
-			e1.printStackTrace();
-		}
-
-		while(comment != null || like != null || friendship != null) {
-			if(comment != null)
-				comment = commentReader.processLine();
-			if(like != null)
-				like = likeReader.processLine();
-			if(friendship != null)
-				friendship = friendshipReader.processLine();
-
-			notify();
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		tempComment = commentReader.processLine();
+		tempLike = likeReader.processLine();
+		tempFriendship = friendshipReader.processLine();
+		
+		while(tempComment != null || tempLike != null || tempFriendship != null) {
+			if(cache.signal) {
+				cache.signal = false;
+				
+				if(tempComment != null && cache.comment == null) {
+					cache.comment = tempComment;
+					tempComment = commentReader.processLine();
+				} else if (tempLike != null && cache.like == null) {
+					cache.like = tempLike;
+					tempLike = likeReader.processLine();
+				} else if (tempFriendship != null && cache.friendship == null){
+					cache.friendship = tempFriendship;
+					tempFriendship = friendshipReader.processLine();
+				}
 			}
 		}
 

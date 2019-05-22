@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import thread.CacheProcessorThread;
 import thread.ProcessorThread;
 import thread.ReaderThread;
+import util.Cache;
 import util.Rank;
 
 public class MyApp {
@@ -18,6 +19,7 @@ public class MyApp {
 	public static Rank rank = new Rank();
 	
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");
+	public static String FILL = "FILLIT";
 	public static int duration;
 	public static int k;
 	
@@ -31,19 +33,17 @@ public class MyApp {
 		String fileNameFriendship = args[4];
 		
 		// Caches initialization :
-		String comment = null;
-		String like = null;
-		String friendship = null;
+		Cache cache = new Cache();
 		
 		//Queue initialization :
 		BlockingQueue<String> processQueue = new LinkedBlockingDeque<>();
 		
 		// READER THREAD (fill up the (string) caches)
-		//new Thread(new ReaderThread(comment,like,friendship,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD").start();
+		new Thread(new ReaderThread(cache,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD").start();
 		
 		// PROCESS READER THREAD (sort caches by time stamp and fill up the queue)
-		//new Thread(new CacheProcessorThread(processQueue,comment,like,friendship), "PROCESS READER THREAD").start();
-		new Thread(new CacheProcessorThread(processQueue,fileNameComment,fileNameLike,fileNameFriendship), "PROCESS READER THREAD").start();
+		new Thread(new CacheProcessorThread(cache, processQueue), "PROCESS READER THREAD").start();
+		//new Thread(new CacheProcessorThread(processQueue,fileNameComment,fileNameLike,fileNameFriendship), "PROCESS READER THREAD").start();
 		
 		// PROCESS QUEUE THREAD (process items in queue)
 		new Thread(new ProcessorThread(processQueue), "PROCESS THREAD").start();
