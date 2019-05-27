@@ -12,9 +12,9 @@ import util.Reader;
 
 public class CacheProcessorThread implements Runnable {
 
-	String comment;
-	String like;
-	String friendship;
+	String comment = "";
+	String like = "";
+	String friendship = "";
 
 	Reader commentReader;
 	Reader likeReader;
@@ -34,10 +34,11 @@ public class CacheProcessorThread implements Runnable {
 		List<String> list = new ArrayList<>();
 		String first = null;
 		String type = "";
+		
 		comment = cache.comment;
 		like = cache.like;
 		friendship = cache.friendship;
-
+		
 		while(comment != null || like != null || friendship != null) {
 			if(!cache.signal) {
 				switch (type) {
@@ -62,17 +63,17 @@ public class CacheProcessorThread implements Runnable {
 				}
 				
 				Collections.sort(list, comparatorTimeStamp);
-
 				first = list.remove(0); //Might trigger a NPE ?
+				if(first == null)
+					break;
 				
-
 				if(first.equals(comment)) {
 					type = "C|";
 					cache.comment = null;
 				} else if(first.equals(like)) {
 					type = "L|";
 					cache.like = null;
-				} else {
+				} else if(first.equals(friendship)){
 					type = "F|";
 					cache.friendship = null;
 				}
@@ -84,18 +85,18 @@ public class CacheProcessorThread implements Runnable {
 					e.printStackTrace();
 				}
 				
-				cache.signal = true;
+				if(cache.readerDone == false)
+					cache.signal = true;
 			}
 		}
 		
 		try {
 			processQueue.put("END");
+			System.out.println("END PROCESSIG");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}
 
 	private Comparator<String> comparatorTimeStamp = new Comparator<String>() {

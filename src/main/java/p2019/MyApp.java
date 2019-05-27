@@ -1,7 +1,6 @@
 package p2019;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -20,10 +19,8 @@ public class MyApp {
 	public static Rank rank = new Rank();
 	
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+0000");
-	public static String FILL = "FILLIT";
 	public static int duration;
 	public static int k;
-	public static ArrayList<Thread> threads = new ArrayList<>(4);
 	
 	public static void main(String[] args) {
 		
@@ -34,36 +31,36 @@ public class MyApp {
 		String fileNameLike = args[3];
 		String fileNameFriendship = args[4];
 		
-		// Caches initialization :
+		// Cache initialization :
 		Cache cache = new Cache();
 		
-		//Queue initialization :
+		// Queue initialization :
 		BlockingQueue<String> processQueue = new LinkedBlockingDeque<>();
 		
 		// READER THREAD (fill up the (string) caches)
-		threads.add(new Thread(new ReaderThread(cache,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD"));
-		threads.get(0).start();
+		Thread reader = new Thread(new ReaderThread(cache,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD");
 		
 		// PROCESS READER THREAD (sort caches by time stamp and fill up the queue)
-		threads.add(new Thread(new CacheProcessorThread(cache, processQueue), "PROCESS READER THREAD"));
-		
-		threads.get(1).start();
-		//new Thread(new CacheProcessorThread(processQueue,fileNameComment,fileNameLike,fileNameFriendship), "PROCESS READER THREAD").start();
+		Thread cacheProcessor = new Thread(new CacheProcessorThread(cache, processQueue), "PROCESS READER THREAD");
 		
 		// PROCESS QUEUE THREAD (process items in queue)
-		threads.add(new Thread(new ProcessorThread(processQueue), "PROCESS THREAD"));
-		threads.get(2).start();
+		Thread processor = new Thread(new ProcessorThread(processQueue), "PROCESS THREAD");
+		
 		
 		// RANK AND OUTPUT THREAD
-		// Rank & Outuput are handled by the main thread ?
-		for(Thread t: threads)
-		{
-			try {
-				t.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		// Rank & Output are handled by the main thread
+		
+		reader.start();
+		cacheProcessor.start();
+		processor.start();
+		
+		try {
+			reader.join();
+			cacheProcessor.join();
+			processor.join();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 }

@@ -36,8 +36,6 @@ public class ReaderThread implements Runnable {
 		
 		while(tempComment != null || tempLike != null || tempFriendship != null) {
 			if(cache.signal) {
-				cache.signal = false;
-				
 				if(tempComment != null && cache.comment == null) {
 					cache.comment = tempComment;
 					tempComment = commentReader.processLine();
@@ -48,9 +46,13 @@ public class ReaderThread implements Runnable {
 					cache.friendship = tempFriendship;
 					tempFriendship = friendshipReader.processLine();
 				}
+				cache.signal = false;
 			}
 		}
 
+		System.out.println("READER END");
+		cache.signal = false;
+		cache.readerDone = true;
 		commentReader.releaseReader();
 		likeReader.releaseReader();
 		friendshipReader.releaseReader();
