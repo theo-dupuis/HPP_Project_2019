@@ -1,6 +1,7 @@
 package p2019;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -22,6 +23,7 @@ public class MyApp {
 	public static String FILL = "FILLIT";
 	public static int duration;
 	public static int k;
+	public static ArrayList<Thread> threads = new ArrayList<>(4);
 	
 	public static void main(String[] args) {
 		
@@ -39,16 +41,29 @@ public class MyApp {
 		BlockingQueue<String> processQueue = new LinkedBlockingDeque<>();
 		
 		// READER THREAD (fill up the (string) caches)
-		new Thread(new ReaderThread(cache,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD").start();
+		threads.add(new Thread(new ReaderThread(cache,fileNameComment,fileNameLike,fileNameFriendship), "READER THREAD"));
+		threads.get(0).start();
 		
 		// PROCESS READER THREAD (sort caches by time stamp and fill up the queue)
-		new Thread(new CacheProcessorThread(cache, processQueue), "PROCESS READER THREAD").start();
+		threads.add(new Thread(new CacheProcessorThread(cache, processQueue), "PROCESS READER THREAD"));
+		
+		threads.get(1).start();
 		//new Thread(new CacheProcessorThread(processQueue,fileNameComment,fileNameLike,fileNameFriendship), "PROCESS READER THREAD").start();
 		
 		// PROCESS QUEUE THREAD (process items in queue)
-		new Thread(new ProcessorThread(processQueue), "PROCESS THREAD").start();
+		threads.add(new Thread(new ProcessorThread(processQueue), "PROCESS THREAD"));
+		threads.get(2).start();
 		
 		// RANK AND OUTPUT THREAD
 		// Rank & Outuput are handled by the main thread ?
+		for(Thread t: threads)
+		{
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
