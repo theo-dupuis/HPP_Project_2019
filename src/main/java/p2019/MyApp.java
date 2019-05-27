@@ -45,10 +45,9 @@ public class MyApp {
 		
 		// PROCESS QUEUE THREAD (process items in queue)
 		Thread processor = new Thread(new ProcessorThread(processQueue), "PROCESS THREAD");
-		
-		
+	
 		// RANK AND OUTPUT THREAD
-		// Rank & Output are handled by the main thread
+			// Rank & Output are handled by the main thread
 		
 		reader.start();
 		cacheProcessor.start();

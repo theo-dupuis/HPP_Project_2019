@@ -92,7 +92,6 @@ public class CacheProcessorThread implements Runnable {
 		
 		try {
 			processQueue.put("END");
-			System.out.println("END PROCESSIG");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

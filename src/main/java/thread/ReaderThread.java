@@ -49,8 +49,7 @@ public class ReaderThread implements Runnable {
 				cache.signal = false;
 			}
 		}
-
-		System.out.println("READER END");
+		
 		cache.signal = false;
 		cache.readerDone = true;
 		commentReader.releaseReader();
